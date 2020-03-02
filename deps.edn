@@ -7,7 +7,8 @@
         ring/ring-jetty-adapter {:mvn/version "1.8.0"}}
  :aliases {:dev   {:extra-paths ["dev"]
                    :extra-deps  {integrant/repl              {:mvn/version "0.3.1"}
-                                 ragtime {:mvn/version "0.8.0"}
+                                 migratus {:mvn/version "1.2.7"}
+                                 com.fzakaria/slf4j-timbre {:mvn/version "RELEASE"}
                                  integrant/integrant         {:mvn/version "0.8.0"}}}
                   :server {:main-opts ["-m" "comment.system"]}
            :test  {:extra-paths ["src/test"]}}}
