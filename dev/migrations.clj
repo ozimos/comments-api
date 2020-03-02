@@ -1,7 +1,8 @@
 (ns migrations
- (:require 
-   [utils.database :refer [db]]
-  [migratus.core :as migratus]))
+  (:require
+   [integrant.core :as ig]
+   [utils.database :refer [db ds]]
+   [migratus.core :as migratus]))
 
 (def db-config
   {:store                :database
@@ -9,9 +10,13 @@
    :init-in-transaction? false
    :db                   db})
 
-(migratus/init db-config)
+(defmethod ig/init-key :db/postgresql [_ _]
+  (migratus/init db-config)
+  (migratus/migrate db-config)
+  ds)
 
 (comment
+  (migratus/init db-config)
   (migratus/create db-config "create-user")
   (migratus/migrate db-config)
 
@@ -23,4 +28,3 @@
 
 ;bring down migrations matching the ids
   (migratus/down db-config 20111206154000))
-  

@@ -1,9 +1,10 @@
 (ns user
   (:require
    [integrant.repl :refer [clear go halt prep init reset reset-all]]
-   [comment.system :refer [config]]))
+   [system :refer [postgresql-config]]))
 
-(integrant.repl/set-prep! (constantly config))
+ 
+(integrant.repl/set-prep! (constantly postgresql-config))
 
 
 (defn -main []

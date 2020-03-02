@@ -11,7 +11,7 @@
   [reitit.ring :as ring]))
 
 (def ok (fn [{:keys [db]}] 
-         (println ":db " db)
+         (println ":db " (. db (getClass)))
          {:status 200 :body "ok"}))
 
 (def routes

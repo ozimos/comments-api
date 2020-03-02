@@ -1,7 +1,8 @@
-(ns comment.system
+(ns system
  (:require 
   [integrant.core :as ig]
   [comment.handler :refer [create-app]]
+  [migrations]
   [ring.adapter.jetty :as jetty]))
 
 (defmethod ig/init-key :adapter/jetty [_ opts]
@@ -26,10 +27,21 @@
 (defmethod ig/init-key :comment/handler [_ {:keys [db]}]
   (create-app db))
 
-(defmethod ig/init-key :db/sql [_ _]
+(defmethod ig/init-key :db/dummy [_ _]
   {:no-db true})
 
-(def config
+(derive :db/dummy :db/sql)
+
+(derive :db/postgresql :db/sql)
+
+(def base-config
  {:adapter/jetty {:port 3000, :handler (ig/ref :comment/handler)}
-  :comment/handler {:db (ig/ref :db/sql)}
-  :db/sql {}})
+  :comment/handler {:db (ig/ref :db/sql)}})
+
+(def dummy-db-config
+  (assoc base-config :db/dummy {}))
+
+(def postgresql-config
+  (assoc base-config :db/postgresql {}))
+
+
