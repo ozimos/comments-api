@@ -1,6 +1,5 @@
 (ns comment.handler
  (:require 
-  [reitit.core :as r]
   [reitit.swagger :as swagger]
   [reitit.ring.middleware.muuntaja :as muuntaja]
   [comment.middleware :as mw]  

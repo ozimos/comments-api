@@ -1,4 +1,4 @@
-{:path ['src']
+{:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.10.1"}
         metosin/reitit {:mvn/version "0.4.2"}
            environ                             {:mvn/version "1.1.0"}
@@ -7,6 +7,7 @@
         ring/ring-jetty-adapter {:mvn/version "1.8.0"}}
  :aliases {:dev   {:extra-paths ["dev"]
                    :extra-deps  {integrant/repl              {:mvn/version "0.3.1"}
+                                 ragtime {:mvn/version "0.8.0"}
                                  integrant/integrant         {:mvn/version "0.8.0"}}}
                   :server {:main-opts ["-m" "comment.system"]}
            :test  {:extra-paths ["src/test"]}}}
